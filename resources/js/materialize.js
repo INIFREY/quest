@@ -580,7 +580,7 @@ if ($) {
           widthDifference = 0;
           gutterSpacing = options.gutter;
           activatesLeft =  ( $(window).width() - origin.offset().left - origin.innerWidth() ) + gutterSpacing;
-          activates.css({ right: 0, width: 'auto' });
+          activates.css({ right: '3px', width: 'auto' });
       }
 
       // Position dropdown
@@ -6415,26 +6415,26 @@ DatePicker.defaults = (function( prefix ) {
     return {
 
         // The title label to use for the month nav buttons
-        labelMonthNext: 'Next month',
-        labelMonthPrev: 'Previous month',
+        labelMonthNext: 'Наступний місяць',
+        labelMonthPrev: 'Попередній місяць',
 
         // The title label to use for the dropdown selectors
-        labelMonthSelect: 'Select a month',
-        labelYearSelect: 'Select a year',
+        labelMonthSelect: 'Виберіть місяць',
+        labelYearSelect: 'Виберіть рік',
 
         // Months and weekdays
-        monthsFull: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
-        monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
-        weekdaysFull: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
-        weekdaysShort: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
+        monthsFull: [ 'Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень' ],
+        monthsShort: [ 'Січ', 'Лют', 'Бер', 'Квіт', 'Трав', 'Чер', 'Лип', 'Срп', 'Вер', 'Жвт', 'Лист', 'Грд' ],
+        weekdaysFull: [ 'Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П`ятниця', 'Субота' ],
+        weekdaysShort: [ 'Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб' ],
 
         // Materialize modified
-        weekdaysLetter: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
+        weekdaysLetter: [ 'Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб' ],
 
         // Today and clear
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Close',
+        today: 'Сьогодні',
+        clear: 'Очистити',
+        close: 'Готово',
 
         // The format to show on the `input` element
         format: 'd mmmm, yyyy',

@@ -1,2 +1,59 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+body {
+  font-family: 'Roboto';
+}
+
+nav{
+  margin-bottom: 30px;
+}
+
+.nav-wrapper{
+  .brand-logo{
+    margin: 0 30px;
+  }
+
+  .fa.fa-btn {
+    margin-right: 1px;
+  }
+}
+
+.register{
+  h4{
+    margin: 0 0 20px 0;
+  }
+
+  #rules+label{
+    margin-top: 20px;
+  }
+  #rules~.input-field{
+    margin-bottom: 20px;
+  }
+}
+
+#loginForm{
+  h4{
+    margin: 0 0 20px 0;
+  }
+}
+
+
+div.invalid, .inputError{
+  font-size: .8rem;
+  margin-top: -15px;
+  color: #F44336;
+}
+
+select.validation{
+  display: inline;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -1000%;
+  opacity: 0;
+}
+
+select.invalid ~ .select-dropdown {
+  border-bottom: 1px solid #F44336;
+}
+

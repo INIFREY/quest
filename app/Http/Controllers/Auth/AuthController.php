@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Models\Phone;
+use App\Models\Email;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -12,26 +14,26 @@ class AuthController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Registration & Login Controller
+    | Регистрация и вход в систему Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
+    | Этот контроллер обрабатывает регистрацию новых пользователей, а также
+    | а также аутентификацию существующих пользователей. По умолчанию этот контроллер использует
+    | простой признак, чтобы добавить эти поведения. Почему бы вам не исследовать его?
     |
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
+     * Куда перенаправить пользователей после входа / регистрации.
      *
      * @var string
      */
     protected $redirectTo = '/';
 
     /**
-     * Create a new authentication controller instance.
+     * Создание нового экземпляра контроллера аутентификации.
      *
      * @return void
      */
@@ -41,34 +43,62 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Получить валидатор для запроса входящей регистрации.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
+        $data['phone'] = preg_replace('/[^0-9]/', '', $data['phone']);
+
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'login' => 'required|alpha_dash|max:25|min:3|unique:users',
+            'email' => 'required|email|max:255|unique:emails,value,NULL,id,verified,1',
             'password' => 'required|min:6|confirmed',
-            'phone' => 'required|min:10',
+            'phone' => 'required|size:12|unique:phones,value,NULL,id,verified,1',
+            'birth' => 'required|date',
+            'sex' => 'required|min:1',
+            'g-recaptcha-response' => 'required|captcha'
+        ], [
+            'login.unique' => 'Такий логін вже зареєстровано!',
+            'email.unique' => 'Такий email вже зареєстровано!',
+            'phone.unique' => 'Такий телефон вже зареєстровано!',
+            'phone.size' => 'Номер телефону невірний!',
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Создать новый экземпляр пользователя после валидной регистрации.
      *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $data['phone'] = preg_replace('/[^0-9]/', '', $data['phone']);
+
+        $user =  User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'login' => $data['login'],
+            'birth' => $data['birth'],
+            'sex' => $data['sex'],
             'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
         ]);
+
+
+        Phone::create([
+            'value' => $data['phone'],
+            'user_id' => $user->id,
+        ]);
+
+        Email::create([
+            'value' => $data['email'],
+            'user_id' => $user->id,
+        ]);
+
+
+        return $user;
     }
 }

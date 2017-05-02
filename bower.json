@@ -1,0 +1,23 @@
+{
+  "name": "Wevudu",
+  "description": "Quest System",
+  "main": "",
+  "authors": [
+    "Valera <inifrey@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/INIFREY/quest",
+  "private": true,
+  "dependencies": {
+    "jquery-legacy": "jquery#^1",
+    "font-awesome": "~4.3.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "resources/vendor"
+  ]
+}

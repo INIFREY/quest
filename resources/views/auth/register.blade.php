@@ -1,96 +1,124 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
+    <div class="container register">
+        <form class="card-panel" method="POST" action="{{ url('/register') }}" id="registerForm">
+            <h4>Реєстрація</h4>
+            {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+            <div class="row">
+                <div class="input-field col l6 s12">
+                    <input id="login" name="login" type="text" value="{{old('login')}}"
+                           class="{{ $errors->has('login')?'invalid':''}}">
+                    @if ($errors->has('login'))
+                        <div class="inputError">{{ $errors->first('login') }}</div>
+                    @endif
+                    <label for="name">Логін</label>
+                </div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" class="col-md-4 control-label">Phone</label>
-
-                            <div class="col-md-6">
-                                <input id="phone" type="tel" class="form-control" name="phone" value="{{ old('phone') }}">
-
-                                @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i> Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="input-field col l6 s12">
+                    <input id="name" name="name" type="text" value="{{ old('name') }}"
+                           class="{{ $errors->has('name') ? 'invalid' : '' }}">
+                    @if ($errors->has('name'))
+                        <div class="inputError">{{ $errors->first('name') }}</div>
+                    @endif
+                    <label for="name">Ім'я</label>
                 </div>
             </div>
-        </div>
+
+            <div class="row">
+                <div class="input-field col l6 s12">
+                    <input id="email" name="email" type="email" value="{{ old('email') }}"
+                           class="{{ $errors->has('email') ? 'invalid' : '' }}">
+                    @if ($errors->has('email'))
+                        <div class="inputError">{{ $errors->first('email') }}</div>
+                    @endif
+                    <label for="email">E-mail</label>
+                </div>
+
+                <div class="input-field col l6 s12">
+                    <input id="phone" name="phone" type="tel" value="{{ old('phone') }}"
+                           class="{{ $errors->has('phone') ? 'invalid' : '' }}">
+                    @if ($errors->has('phone'))
+                        <div class="inputError">{{ $errors->first('phone') }}</div>
+                    @endif
+                    <label for="phone">Телефон</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col l6 s12">
+                    <input id="birth" name="birth" type="date" value="{{ old('birth') }}"
+                           class="{{ $errors->has('birth') ? 'invalid' : '' }}">
+                    @if ($errors->has('birth'))
+                        <div class="inputError">{{ $errors->first('birth') }}</div>
+                    @endif
+                    <label for="birth">Дата народження</label>
+                </div>
+
+                <div class="input-field col l6 s12">
+                    <select id="sex" name="sex" class="validation {{ $errors->has('sex') ? 'invalid' : '' }}">
+                        <option value="" disabled {{old('sex')?'':'selected'}}>Стать</option>
+                        <option value="1" {{old('sex')==1?'selected':''}}>Чоловік</option>
+                        <option value="2" {{old('sex')==2?'selected':''}}>Жінка</option>
+                    </select>
+                    @if ($errors->has('sex'))
+                        <div class="inputError">{{ $errors->first('sex') }}</div>
+                    @endif
+                    <label for="sex">Стать</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col l6 s12">
+                    <input id="password" name="password" type="password"
+                           class="{{ $errors->has('password') ? 'invalid' : '' }}">
+                    @if ($errors->has('password'))
+                        <div class="inputError">{{ $errors->first('password') }}</div>
+                    @endif
+                    <label for="password">Пароль</label>
+                </div>
+
+                <div class="input-field col l6 s12">
+                    <input id="password_confirmation" name="password_confirmation" type="password"
+                           class="{{ $errors->has('password_confirmation') ? 'invalid' : '' }}">
+                    @if ($errors->has('password_confirmation'))
+                        <div class="inputError">{{ $errors->first('password_confirmation') }}</div>
+                    @endif
+                    <label for="password_confirmation">Підтвердження пароля</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l6 s12">
+                    <input type="checkbox" class="filled-in" id="rules" name="rules"
+                           {{old('rules')?'checked':''}} data-error=".errRules"/>
+                    <label for="rules">Погоджуюсь з <a href="#!">правилами</a></label>
+
+                    <div class="input-field">
+                        <div class="errRules"></div>
+                    </div>
+                </div>
+
+                <div class="col l6 s12">
+                    {!! app('captcha')->display() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                        <div class="input-field">
+                            <div class="inputError">Підтвердіть, що ви не робот!</div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l6 s12">
+                    <button type="submit" class="btn waves-effect waves-light">
+                        Реєстрація <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
     </div>
-</div>
 @endsection

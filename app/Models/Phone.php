@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Phone extends Model
 {
     /**
      * Атрибуты, которые можно назначать по маске.
@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'login', 'password', 'birth', 'sex'
+        'value', 'user_id', 'verified'
     ];
 
     /**
@@ -21,6 +21,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'id'
     ];
+
+    public $timestamps = false;
 }

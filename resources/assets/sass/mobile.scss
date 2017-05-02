@@ -1,0 +1,14 @@
+@media only screen and (max-width: 992px) {
+  .nav-wrapper .brand-logo {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .g-recaptcha {
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+  }
+}
