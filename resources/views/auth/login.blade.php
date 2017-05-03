@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form class="card-panel" role="form" method="POST" autocomplete="off" action="{{ url('/login') }} " id="loginForm">
+        <form class="card-panel" method="POST" action="{{ url('/login') }} " id="loginForm">
             <h4>Вхід</h4>
             {{ csrf_field() }}
 

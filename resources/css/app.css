@@ -10,16 +10,13 @@ nav {
 .nav-wrapper .fa.fa-btn {
   margin-right: 1px; }
 
-.register h4 {
-  margin: 0 0 20px 0; }
-
 .register #rules + label {
   margin-top: 20px; }
 
 .register #rules ~ .input-field {
   margin-bottom: 20px; }
 
-#loginForm h4 {
+form h4 {
   margin: 0 0 20px 0; }
 
 div.invalid, .inputError {

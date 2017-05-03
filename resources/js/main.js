@@ -49,47 +49,6 @@ $( document ).ready(function(){
         return this.optional(element) || value.replace(/[^0-9]/g,"").length===params;
     }, "Невірний формат вводу!");
 
-    $("#loginForm").validate({
-        rules: {
-            login: {
-                required: true,
-                alpha_dash: true,
-                minlength: 3,
-                maxlength: 25
-
-            },
-            password: {
-                required: true
-            }
-        },
-        //For custom messages
-        messages: {
-            login:{
-                required: "Введіть логін",
-                minlength: "Мінімальна довжина - 3 символи"
-            }
-        },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-            var placement = $(element).data('error');
-            if (placement) {
-                $(placement).append(error)
-            } else {
-                error.insertAfter(element);
-            }
-        },
-        errorClass: 'invalid'
-    });
-
-    $('input').focus(function(){
-        $(this).next('.inputError').hide();
-    });
-
-
-    /********************* **********************/
-    /*********      Форма входа      ************/
-    /********************* **********************/
-
     $("#registerForm").validate({
         rules: {
             name: {
@@ -158,6 +117,121 @@ $( document ).ready(function(){
         },
         errorClass: 'invalid'
     });
+
+    $('input').focus(function(){
+        $(this).next('.inputError').hide();
+    });
+
+
+    /********************* **********************/
+    /*********      Форма входа      ************/
+    /********************* **********************/
+
+    $("#loginForm").validate({
+        rules: {
+            login: {
+                required: true,
+                alpha_dash: true,
+                minlength: 3,
+                maxlength: 25
+
+            },
+            password: {
+                required: true
+            }
+        },
+        //For custom messages
+        messages: {
+            login:{
+                required: "Введіть логін",
+                minlength: "Мінімальна довжина - 3 символи"
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid'
+    });
+
+
+    /************************************ *******************************/
+    /*********      Форма восстановления пароля (1 шаг)      ************/
+    /************************************ *******************************/
+
+    $("#emailForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email:true
+            }
+        },
+        messages: {
+            email:{
+                required: "Введіть електронну пошту",
+                email: "Невірний формат"
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false
+    });
+
+    /************************************ *******************************/
+    /*********      Форма восстановления пароля (2 шаг)      ************/
+    /************************************ *******************************/
+
+    $("#resetForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email:true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            password_confirmation: {
+                required: true,
+                minlength: 6,
+                equalTo: "#password"
+            }
+        },
+        messages: {
+            email:{
+                required: "Введіть електронну пошту",
+                email: "Невірний формат"
+            },
+            password_confirmation: {
+                equalTo: "Паролі не співпадають!",
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false
+    });
+
 
 
 
