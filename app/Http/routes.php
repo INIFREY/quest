@@ -17,4 +17,11 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => ['auth','email.verify']], function () {
+    Route::get('/home', 'HomeController@index');
+});
+
+Route::get('/email/sendActivate', 'Profile\EmailController@sendActivate'); // Отправка письма активации
+Route::get('/email/activate/{token}/email={email}', 'Profile\EmailController@activate'); // Активация почты
+Route::post('/email/change', 'Profile\EmailController@change'); // Изменение почты
+

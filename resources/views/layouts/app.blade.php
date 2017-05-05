@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Wevudu{{isset($title) ? ' - '.$title : ''}}</title>
 
@@ -19,56 +20,59 @@
 <body id="app-layout">
 <header>
     <nav>
-        <div class="nav-wrapper">
-            <!-- Branding Image -->
-            <a class="brand-logo" href="{{ url('/') }}">
-                Wevudu
-            </a>
-            <a href="#" data-activates="nav-mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Branding Image -->
+                <a class="brand-logo" href="{{ url('/') }}">
+                    Wevudu
+                </a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
 
-            <ul class="right hide-on-med-and-down">
+                <ul class="right hide-on-med-and-down">
 
-                @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Вхід</a></li>
-                    <li><a href="{{ url('/register') }}">Реєстрація</a></li>
-                    @else
-                            <!-- Dropdown Structure -->
-                    <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Вихід</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#!">Test</a></li>
-                    </ul>
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Вхід</a></li>
+                        <li><a href="{{ url('/register') }}">Реєстрація</a></li>
+                        @else
+                                <!-- Dropdown Structure -->
+                        <ul id="dropdown1" class="dropdown-content">
+                            <li><a href="/home">Home</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Вихід</a></li>
+                        </ul>
 
-                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{ Auth::user()->name }}<i
-                                    class="material-icons right">arrow_drop_down</i></a></li>
-                @endif
-            </ul>
-            <ul id="nav-mobile" class="side-nav">
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{ Auth::user()->name }}<i
+                                        class="material-icons right">arrow_drop_down</i></a></li>
+                    @endif
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
 
 
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Вхід</a></li>
-                            <li><a href="{{ url('/register') }}">Реєстрація</a></li>
-                            @else
-                                    <!-- Dropdown Structure -->
-                            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">{{ Auth::user()->name }}<i
-                                            class="material-icons right">arrow_drop_down</i></a>
-                                <div class="collapsible-body" style="">
-                                    <ul>
-                                        <li><a href="{{ url('/logout') }}">Вихід</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#!">Test</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-            </ul>
+                            @if (Auth::guest())
+                                <li><a href="{{ url('/login') }}">Вхід</a></li>
+                                <li><a href="{{ url('/register') }}">Реєстрація</a></li>
+                                @else
+                                        <!-- Dropdown Structure -->
+                                <li class="bold"><a class="collapsible-header  waves-effect waves-teal">{{ Auth::user()->name }}<i
+                                                class="material-icons right">arrow_drop_down</i></a>
+                                    <div class="collapsible-body" style="">
+                                        <ul>
+                                            <li><a href="/home">Home</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ url('/logout') }}">Вихід</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
 
+            </div>
         </div>
+
     </nav>
 </header>
 <main>

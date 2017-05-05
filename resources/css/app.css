@@ -1,5 +1,6 @@
 body {
-  font-family: 'Roboto'; }
+  font-family: 'Roboto';
+  background-color: #f9f9f9; }
 
 nav {
   margin-bottom: 30px; }
@@ -34,6 +35,34 @@ select.validation {
 
 select.invalid ~ .select-dropdown {
   border-bottom: 1px solid #F44336; }
+
+.card .card-title i {
+  font-size: 27px;
+  position: relative;
+  top: 4px; }
+
+.card .card-content button {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.card .card-content p {
+  margin-bottom: 5px;
+  margin-top: 5px; }
+
+.card .card-content .collapsible {
+  border: none; }
+
+.card .card-content .collapsible-header {
+  border: none; }
+
+.card .close {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  font-size: 20px;
+  color: #fff; }
 
 @media only screen and (max-width: 992px) {
   .nav-wrapper .brand-logo {

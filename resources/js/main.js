@@ -18,6 +18,12 @@ $( document ).ready(function(){
 
     $('select').material_select();
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 
     /********************* **********************/
     /*********       Валидатор       ************/
@@ -230,6 +236,88 @@ $( document ).ready(function(){
         },
         errorClass: 'invalid',
         focusInvalid: false
+    });
+
+    /********************** *******************************/
+    /*********      Форма изменения почты      ************/
+    /********************** *******************************/
+
+    $("#changeEmailForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email:true
+            }
+        },
+        messages: {
+            email:{
+                required: "Введіть електронну пошту",
+                email: "Невірний формат"
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false,
+        submitHandler: function(form) {
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(data) {
+                    if (data.status=='success') swal("Готово!", "Вашу алектронну адресу успішно змінено! На нову адресу уже відправлено лист для її активації.", "success");
+                    else if (data.status=='error') {
+                        text = '';
+                        if (data.msg == 'old') text = "Ви ввели вашу стару електронну адресу.";
+                        swal("Помилка!", text, "error");
+                    } else console.log(data);
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    if (errors['email'])  swal("Помилка!", errors['email'][0], "error");
+                    else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
+
+                }
+            });
+        }
+    });
+
+
+    // Повторная отправка письма-подтверждения
+    $('#resendEmail').click(function(){
+        $.ajax({
+            url: "/email/sendActivate",
+            success: function(data){
+                if (data.status=='success') swal("Відправлено!", "Перевірте свою електронну адресу!", "success");
+                else if (data.status=='error') {
+                    text = '';
+                    if (data.msg == 'verified') text = "Таку електронну адресу уже підтверджено.";
+                    swal("Помилка!", text, "error");
+                } else console.log(data);
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
+
+
+
+
+
+
+    $(".card .close").click(function() {
+        $(this).closest(".card").fadeOut("slow")
     });
 
 

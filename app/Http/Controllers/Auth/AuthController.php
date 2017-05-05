@@ -9,6 +9,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -93,10 +94,13 @@ class AuthController extends Controller
             'user_id' => $user->id,
         ]);
 
-        Email::create([
+        $email = Email::create([
             'value' => $data['email'],
             'user_id' => $user->id,
+            'token' => str_random(30),
         ]);
+
+        $email->sendActivateMail();
 
 
         return $user;
