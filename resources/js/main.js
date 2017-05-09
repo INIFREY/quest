@@ -55,17 +55,23 @@ $( document ).ready(function(){
         return this.optional(element) || value.replace(/[^0-9]/g,"").length===params;
     }, "Невірний формат вводу!");
 
+    $.validator.addMethod("spaces", function(value, element, params) {
+        return this.optional(element) || value.replace(/\s/g,'')!='';
+    }, "В полі не можуть бути тільки пробіли!");
+
     $("#registerForm").validate({
         rules: {
             name: {
                 required: true,
-                minlength: 3
+                minlength: 3,
+                spaces: true
             },
             login: {
                 required: true,
                 alpha_dash: true,
                 minlength: 3,
-                maxlength: 25
+                maxlength: 25,
+                spaces: true
 
             },
             email: {
@@ -85,7 +91,8 @@ $( document ).ready(function(){
             },
             password: {
                 required: true,
-                minlength: 6
+                minlength: 6,
+                spaces: true
             },
             password_confirmation: {
                 required: true,
@@ -139,7 +146,8 @@ $( document ).ready(function(){
                 required: true,
                 alpha_dash: true,
                 minlength: 3,
-                maxlength: 25
+                maxlength: 25,
+                spaces: true
 
             },
             password: {
@@ -208,7 +216,8 @@ $( document ).ready(function(){
             },
             password: {
                 required: true,
-                minlength: 6
+                minlength: 6,
+                spaces: true
             },
             password_confirmation: {
                 required: true,
@@ -312,14 +321,75 @@ $( document ).ready(function(){
     });
 
 
+    /********************** *************************************************/
+    /*********      Форма изменения основных данных профиля      ************/
+    /********************** *************************************************/
+
+    $("#changeProfileGeneralForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3,
+                spaces: true
+            },
+            about: {
+                minlength: 10,
+                maxlength: 255,
+                spaces: true
+            }
+        },
+        messages: {
+
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false,
+        submitHandler: function(form) {
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(data) {
+                    if (data.status=='success') swal("Готово!", "Ваші дані успішно змінено!", "success");
+                    else if (data.status=='error') {
+                        swal("Помилка!", "", "error");
+                    } else console.log(data);
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    if (errors['email'])  swal("Помилка!", errors['name'][0], "error");
+                    else if (errors['about'])  swal("Помилка!", errors['about'][0], "error");
+                    else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
+
+                }
+            });
+        }
+    });
 
 
 
 
+    // Закрытие карточек при нажатии на крестик
     $(".card .close").click(function() {
         $(this).closest(".card").fadeOut("slow")
     });
 
+    // Запуск подсчета введенных символов в инпутах
+    $('.characterCounter').characterCounter();
+
+    // Всплывающие подсказки
+    $('.tooltipped').tooltip({delay: 50});
 
 
 

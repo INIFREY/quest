@@ -18,7 +18,16 @@ Route::get('/', function () {
 Route::auth();
 
 Route::group(['middleware' => ['auth','email.verify']], function () {
-    Route::get('/home', 'HomeController@index');
+    Route::get('/profile/edit', 'Profile\ProfileController@edit'); // Редактирование профиля
+    Route::get('/profile/{id}', [  // Просмотр профиля
+        'as' => 'profile',
+        'uses' => 'Profile\ProfileController@index'
+    ]);
+    Route::get('/profile',function(){ // Просмотр своего профиля
+        return redirect()->route('profile', ['id' => Auth::user()->id]);
+    });
+    Route::post('/profile/edit/general', 'Profile\ProfileController@editGeneral')->name('profileEditGeneral');; // Редактировать основные настройки
+
 });
 
 Route::get('/email/sendActivate', 'Profile\EmailController@sendActivate'); // Отправка письма активации

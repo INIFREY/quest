@@ -36,9 +36,9 @@
                         @else
                                 <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
-                            <li><a href="/home">Home</a></li>
+                            <li><a href="{{url('/profile')}}"><i class="material-icons">person</i>Профіль</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Вихід</a></li>
+                            <li><a href="{{url('/logout')}}"><i class="material-icons">exit_to_app</i>Вихід</a></li>
                         </ul>
 
                         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{ Auth::user()->name }}<i
@@ -59,7 +59,7 @@
                                                 class="material-icons right">arrow_drop_down</i></a>
                                     <div class="collapsible-body" style="">
                                         <ul>
-                                            <li><a href="/home">Home</a></li>
+                                            <li><a href="{{url('/profile')}}">Профіль</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ url('/logout') }}">Вихід</a></li>
                                         </ul>

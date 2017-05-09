@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-family: 'Roboto';
   background-color: #f9f9f9; }
@@ -63,6 +64,58 @@ select.invalid ~ .select-dropdown {
   right: 10px;
   font-size: 20px;
   color: #fff; }
+
+/**   Профиль пользователя   **/
+.profile-image {
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 20px; }
+
+.profile-name {
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 15px; }
+
+hr.light {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  opacity: 0.3; }
+
+.profile-actions {
+  border-left: none;
+  border-right: none;
+  border-color: rgba(224, 224, 224, 0.3);
+  margin: 0; }
+  .profile-actions i {
+    vertical-align: bottom; }
+  .profile-actions .collection-item {
+    border-color: rgba(224, 224, 224, 0.3); }
+
+.profile-social {
+  margin-top: 15px;
+  font-size: 26px; }
+  .profile-social a {
+    margin: 0 5px; }
+
+.profile-statistics i.fa {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+  line-height: normal;
+  height: 40px; }
+
+.medium-small {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0; }
+
+.material-tooltip {
+  visibility: visible; }
+  .material-tooltip .backdrop {
+    visibility: visible; }
 
 @media only screen and (max-width: 992px) {
   .nav-wrapper .brand-logo {
