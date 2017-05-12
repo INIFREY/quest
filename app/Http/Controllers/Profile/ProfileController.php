@@ -40,7 +40,13 @@ class ProfileController extends Controller
         $user->about  = $request->input('about');
         $user->save();
 
-        return ['status'=>'success'];
+        $result = ['status'=>'success'];
+        if( $request->input('name')!="" && $request->input('about')!="" && !$user->wasEarlierCoin("editGeneral")) {
+            $user->sendCoins("5", "editGeneral");
+            $result['money']='success';
+            $result['moneyCount']='5';
+        }
+        return $result;
     }
 
 }

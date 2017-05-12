@@ -71,7 +71,7 @@
                         <div class="card-content col s6">
                             <div class="card-title">
                                 <i class="fa fa-gg-circle"></i>
-                                250
+                                {{$user->coins}}
                             </div>
                             <div class="medium-small grey-text">Монет</div>
                         </div>

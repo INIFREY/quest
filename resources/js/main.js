@@ -358,7 +358,15 @@ $( document ).ready(function(){
                 type: form.method,
                 data: $(form).serialize(),
                 success: function(data) {
-                    if (data.status=='success') swal("Готово!", "Ваші дані успішно змінено!", "success");
+                    if (data.status=='success') swal({ title: "Готово!",
+                        text:"Ваші дані успішно змінено!",
+                        type: "success",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function(){
+                        if (data.money=='success') swal("Вам нараховано "+data.moneyCount+" монет");
+                        else swal.close();
+                    });
                     else if (data.status=='error') {
                         swal("Помилка!", "", "error");
                     } else console.log(data);
