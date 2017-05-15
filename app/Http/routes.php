@@ -26,7 +26,8 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
     Route::get('/profile',function(){ // Просмотр своего профиля
         return redirect()->route('profile', ['id' => Auth::user()->id]);
     });
-    Route::post('/profile/edit/general', 'Profile\ProfileController@editGeneral')->name('profileEditGeneral');; // Редактировать основные настройки
+    Route::post('/profile/edit/general', 'Profile\ProfileController@editGeneral')->name('profileEditGeneral'); // Редактировать основные настройки
+    Route::post('/profile/edit/password', 'Profile\ProfileController@editPassword')->name('profileEditPassword'); // Редактировать пароль
 
 });
 
@@ -34,3 +35,9 @@ Route::get('/email/sendActivate', 'Profile\EmailController@sendActivate'); // О
 Route::get('/email/activate/{token}/email={email}', 'Profile\EmailController@activate'); // Активация почты
 Route::post('/email/change', 'Profile\EmailController@change'); // Изменение почты
 
+
+
+Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
+Route::post('/admin/login','AdminAuth\AuthController@login');
+Route::get('/admin/logout','AdminAuth\AuthController@logout');
+Route::get('/admin', 'AdminController@index');

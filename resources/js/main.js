@@ -369,12 +369,77 @@ $( document ).ready(function(){
                     });
                     else if (data.status=='error') {
                         swal("Помилка!", "", "error");
-                    } else console.log(data);
+                    } else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
                 },
                 error: function(data) {
                     var errors = data.responseJSON;
                     if (errors['email'])  swal("Помилка!", errors['name'][0], "error");
                     else if (errors['about'])  swal("Помилка!", errors['about'][0], "error");
+                    else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
+
+                }
+            });
+        }
+    });
+
+
+    /********************** *********************************/
+    /*********      Форма изменения пароля      *************/
+    /********************** *********************************/
+
+    $("#changePassForm").validate({
+        rules: {
+            password: {
+                required: true,
+                spaces: true
+            },
+            new_password: {
+                required: true,
+                minlength: 6,
+                spaces: true
+            },
+            new_password_confirmation: {
+                required: true,
+                minlength: 6,
+                equalTo: "#new_password"
+            },
+        },
+        messages: {
+
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false,
+        submitHandler: function(form) {
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function(data) {
+                    if (data.status=='success') swal("Готово!", "Ваш пароль успішно змінено!", "success");
+                    else {
+                        var text = data.msg || "";
+                        swal("Помилка!", text, "error");
+                        console.log(data);
+                    }
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    if (errors[0])  swal("Помилка!", errors[0][0], "error");
                     else{
                         swal("Помилка!", "", "error");
                         console.log(data);

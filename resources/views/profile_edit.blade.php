@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container profileEdit">
         <div class="row">
             <div class="col m6 s12">
                 <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
@@ -29,14 +29,64 @@
                                     Зберегти <i class="material-icons right">save</i>
                                 </button>
                             </div>
-
                         </form>
                     </li>
                 </ul>
             </div>
 
             <div class="col m6 s12">
-                df
+                <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header teal white-text">Email
+                        </div>
+                        <form class="collapsible-body teal lighten-5" method="POST" action="{{url('/email/change')}} " id="changeEmailForm">
+                            {{ csrf_field() }}
+                            <div class="input-field">
+                                <input id="email" name="email" type="email" value="{{$user->getEmailValue()}} "
+                                       class="{{ $errors->has('email') ? 'invalid' : '' }}" >
+                                <label class=" black-text" for="email">Новий e-mail</label>
+                            </div>
+
+                            <div class="input-field">
+                                <button type="submit" class="btn waves-effect waves-light teal lighten-1">
+                                    Зберегти <i class="material-icons right">save</i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+
+                    <li>
+                        <div class="collapsible-header teal white-text">Пароль
+                        </div>
+                        <form class="collapsible-body teal lighten-5" method="POST" action="{{route('profileEditPassword')}} " autocomplete="off" id="changePassForm">
+                            {{ csrf_field() }}
+                            <div class="input-field">
+                                <input id="password" name="password" type="password"
+                                       class="{{ $errors->has('password') ? 'invalid' : '' }}" >
+                                <label class=" black-text" for="password">Старий пароль</label>
+                            </div>
+
+                            <div class="input-field">
+                                <input id="new_password" name="new_password" type="password"
+                                       class="{{ $errors->has('new_password') ? 'invalid' : '' }}" >
+                                <label class=" black-text" for="new_password">Новий пароль</label>
+                            </div>
+
+                            <div class="input-field">
+                                <input id="new_password_confirmation" name="new_password_confirmation" type="password"
+                                       class="{{ $errors->has('new_password_confirmation') ? 'invalid' : '' }}" >
+                                <label class=" black-text" for="new_password_confirmation">Підтвердження пароля</label>
+                            </div>
+
+                            <div class="input-field">
+                                <button type="submit" class="btn waves-effect waves-light teal lighten-1">
+                                    Зберегти <i class="material-icons right">save</i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+
+                </ul>
             </div>
         </div>
     </div>

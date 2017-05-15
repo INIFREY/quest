@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 use App\Models\SendCoins;
+use App\Models\Email;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,14 @@ class User extends Authenticatable
         $reg = new Carbon($this->created_at);
         $today = Carbon::now();
         return $today->diffInDays($reg);
+    }
+
+    /**
+     *  Возвращает email пользователя
+     */
+    public function getEmailValue(){
+        $email = Email::where('user_id', $this->id)->get()->last();
+        return $email->value;
     }
 
     /**

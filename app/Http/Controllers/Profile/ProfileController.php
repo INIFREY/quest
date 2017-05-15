@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -47,6 +49,29 @@ class ProfileController extends Controller
             $result['moneyCount']='5';
         }
         return $result;
+    }
+
+    public function editPassword(Request $request)
+    {
+        if(!$request->ajax()) return redirect('/');
+
+        $this->validate($request, [
+            'password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        $data = Input::all();
+
+        if (Hash::check($data['password'], $user->password)){
+            $user->password = bcrypt($data['new_password']);
+            $user->save();
+            return ['status'=>'success'];
+        } else {
+            return ['status'=>'error', 'msg'=>"Старий пароль неправильний!"];
+        }
+
     }
 
 }
