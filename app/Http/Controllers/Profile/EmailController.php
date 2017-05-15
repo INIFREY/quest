@@ -47,13 +47,15 @@ class EmailController extends Controller
     public function change(Request $request){
         if(!$request->ajax()) return redirect('/');
 
+        $user = Auth::user(); // Получаем авторизированного пользователя
+
         $this->validate($request, [
-            'email' => 'required|email|max:255|unique:emails,value,NULL,id,verified,1',
+            'email' => 'required|email|max:255|unique:emails,value,'.$user->id.',user_id,verified,1',
         ], [
             'email.unique' => 'Такий email вже зареєстровано!',
         ]);
 
-        $user = Auth::user(); // Получаем авторизированного пользователя
+
         $email = Email::where('user_id', $user->id)->get()->last(); // Берем его последнюю почту
         if ($request->input('email')==$email->value) return ['status'=>'error', 'msg'=>"old"];
         $email->value=$request->input('email');

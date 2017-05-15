@@ -37,7 +37,14 @@ Route::post('/email/change', 'Profile\EmailController@change'); // Измене�
 
 
 
-Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
-Route::post('/admin/login','AdminAuth\AuthController@login');
-Route::get('/admin/logout','AdminAuth\AuthController@logout');
-Route::get('/admin', 'AdminController@index');
+// Админка
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
+{
+    Route::get('/login','AuthController@showLoginForm');
+    Route::post('/login','AuthController@login');   
+   
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('/', 'AdminController@index');
+        Route::get('logout','AuthController@logout');
+    });
+});
