@@ -364,7 +364,10 @@ $( document ).ready(function(){
                         closeOnConfirm: false,
                         closeOnCancel: false
                     }, function(){
-                        if (data.money=='success') swal("Вам нараховано "+data.moneyCount+" монет");
+                        if (data.money=='success') {
+                            $('#coinsEditGeneral').hide();
+                            swal("Вам нараховано "+data.moneyCount+" монет");
+                        }
                         else swal.close();
                     });
                     else if (data.status=='error') {

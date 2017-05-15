@@ -8,7 +8,7 @@
                     <li>
                         <div class="collapsible-header teal white-text">Основні дані
                             @if (!$user->wasEarlierCoin("editGeneral"))
-                            <span class="new badge red tooltipped" data-tooltip="Отримаєте, якщо заповните усі поля"  data-position="top" data-badge-caption="монет">+5</span>
+                            <span id="coinsEditGeneral" class="new badge red tooltipped" data-tooltip="Отримаєте, якщо заповните усі поля"  data-position="top" data-badge-caption="монет">+5</span>
                             @endif
                         </div>
                         <form class="collapsible-body teal lighten-5" method="POST" action="{{route('profileEditGeneral')}} "

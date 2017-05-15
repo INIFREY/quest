@@ -41,10 +41,10 @@ Route::post('/email/change', 'Profile\EmailController@change'); // Измене�
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
 {
     Route::get('/login','AuthController@showLoginForm');
-    Route::post('/login','AuthController@login');   
+    Route::post('/login','AuthController@login');
    
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/', 'AdminController@index');
-        Route::get('logout','AuthController@logout');
+        Route::get('/logout','AuthController@logout');
     });
 });

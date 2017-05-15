@@ -57,3 +57,4 @@ elixir(function (mix) {
         'public/js/app.js'
     ]);
 });
+
