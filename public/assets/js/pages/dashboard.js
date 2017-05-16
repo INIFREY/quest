@@ -59,7 +59,7 @@ $(function() {
     // Traffic sources stream chart
     // ------------------------------
 
-    trafficSources('#traffic-sources', 330); // initialize chart
+    //trafficSources('#traffic-sources', 330); // initialize chart
 
     // Chart setup
     function trafficSources(element, height) {
@@ -522,9 +522,8 @@ $(function() {
             .attr('class', 'd3-tip')
             .html(function (d) {
                 return "<ul class='list-unstyled mb-5'>" +
-                    "<li>" + "<div class='text-size-base mt-5 mb-5'><i class='icon-circle-left2 position-left'></i>" + d.name + " app" + "</div>" + "</li>" +
-                    "<li>" + "Sales: &nbsp;" + "<span class='text-semibold pull-right'>" + d.value + "</span>" + "</li>" +
-                    "<li>" + "Revenue: &nbsp; " + "<span class='text-semibold pull-right'>" + "$" + (d.value * 25).toFixed(2) + "</span>" + "</li>" + 
+                    "<li>" + "<div class='text-size-base mt-5 mb-5'><i class='icon-circle-left2 position-left'></i>" + d.name  + "</div>" + "</li>" +
+                    "<li>" + "К-сть: &nbsp;" + "<span class='text-semibold pull-right'>" + d.value + "</span>" + "</li>" +
                 "</ul>";
             });
 
@@ -1446,10 +1445,10 @@ $(function() {
 
                 // Reverse tooltip at the end point
                 if(mousex >= (d3Container.node().getBoundingClientRect().width - focusText.select('text').node().getBoundingClientRect().width - margin.right - margin.left)) {
-                    focusText.select("text").attr('text-anchor', 'end').attr("x", function () { return (x(d.date) - 15) + "px" }).text(formatDate(d.date) + " - " + d.value + " sales");
+                    focusText.select("text").attr('text-anchor', 'end').attr("x", function () { return (x(d.date) - 15) + "px" }).text(formatDate(d.date) + " - " + d.value + " реєстрацій");
                 }
                 else {
-                    focusText.select("text").attr('text-anchor', 'start').attr("x", function () { return (x(d.date) + 15) + "px" }).text(formatDate(d.date) + " - " + d.value + " sales");
+                    focusText.select("text").attr('text-anchor', 'start').attr("x", function () { return (x(d.date) + 15) + "px" }).text(formatDate(d.date) + " - " + d.value + " реєстрацій");
                 }
             }
 

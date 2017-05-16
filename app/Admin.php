@@ -25,6 +25,14 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getRoleName(){
+        switch ($this->role){
+            case 'administrator': return "Адміністратор";
+            case 'editor': return "Редактор";
+            default: return "Користувач";
+        }
+    }
+
 
 
 }

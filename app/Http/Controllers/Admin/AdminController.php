@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -13,6 +14,8 @@ class AdminController extends Controller
     }
 
     public function index(){
-        return view('admin.dashboard', ['aId'=>Auth::guard('admin')->user(), 'uId'=>Auth::user()]);
+        setlocale(LC_TIME, 'uk-UA.utf8');
+        $tt = Carbon::now()->formatLocalized('%A %d %B %Y');
+        return view('admin.dashboard', ['admin'=>Auth::guard('admin')->user(), 't'=>$tt]);
     }
 }
