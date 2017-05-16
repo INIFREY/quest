@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -72,6 +73,24 @@ class ProfileController extends Controller
             return ['status'=>'error', 'msg'=>"Старий пароль неправильний!"];
         }
 
+    }
+
+    public function editPhoto(Request $request){
+        if(!$request->ajax()) return redirect('/');
+
+        $this->validate($request, [
+            'photo' => 'required|max:2050|image'
+        ]);
+
+        $avatar = $request->file('photo');
+
+        Storage::disk('public')->put(
+            'avatars/'.Auth::user()->id.".".$avatar->getClientOriginalExtension(),
+            file_get_contents($avatar->getRealPath())
+        );
+
+        $result = ['status'=>'success'];
+        return $result;
     }
 
 }

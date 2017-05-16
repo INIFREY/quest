@@ -31,6 +31,27 @@
                             </div>
                         </form>
                     </li>
+
+                    <li>
+                        <div class="collapsible-header teal white-text">Фотографія
+                            @if (!$user->wasEarlierCoin("editPhoto"))
+                                <span id="coinsEditPhoto" class="new badge red tooltipped" data-tooltip="Отримаєте, якщо заповните усі поля"  data-position="top" data-badge-caption="монет">+5</span>
+                            @endif
+                        </div>
+                        <form class="collapsible-body teal lighten-5" method="POST" action="{{route('profileEditPhoto')}} "
+                              id="changeProfilePhotoForm" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="input-field">
+                                <input id="photo" name="photo" type="file" class="dropify" data-show-remove="false" data-max-file-size="2M" data-allowed-file-extensions="jpg png jpeg"/>
+                            </div>
+
+                            <div class="input-field">
+                                <button type="submit" class="btn waves-effect waves-light teal lighten-1">
+                                    Зберегти <i class="material-icons right">save</i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
                 </ul>
             </div>
 

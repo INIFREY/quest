@@ -379,7 +379,7 @@ $( document ).ready(function(){
                 },
                 error: function(data) {
                     var errors = data.responseJSON;
-                    if (errors['email'])  swal("Помилка!", errors['name'][0], "error");
+                    if (errors['name'])  swal("Помилка!", errors['name'][0], "error");
                     else if (errors['about'])  swal("Помилка!", errors['about'][0], "error");
                     else{
                         swal("Помилка!", "", "error");
@@ -454,6 +454,65 @@ $( document ).ready(function(){
     });
 
 
+    /********************** *********************************/
+    /*********      Форма загрузки фото         *************/
+    /********************** *********************************/
+
+    $("#changeProfilePhotoForm").validate({
+        rules: {
+            photo: {
+                required: true
+            }
+        },
+        messages: {
+
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false,
+        submitHandler: function(form) {
+
+
+            $.ajax({
+                url: form.action,
+                type: form.method,
+
+                contentType: false, // важно - убираем форматирование данных по умолчанию
+                processData: false, // важно - убираем преобразование строк по умолчанию
+                data: new FormData($(form)[0]),
+                success: function(data) {
+                    if (data.status=='success') swal("Готово!", "Ваше фото успішно завантажено!", "success");
+                    else {
+                        var text = data.msg || "";
+                        swal("Помилка!", text, "error");
+                        console.log(data);
+                    }
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    if (errors){
+                        for(var e in errors) {
+                            swal("Помилка!", errors[e][0], "error");
+                            break;
+                        }
+                    }
+                    else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
+
+                }
+            });
+        }
+    });
 
 
     // Закрытие карточек при нажатии на крестик
@@ -467,6 +526,23 @@ $( document ).ready(function(){
     // Всплывающие подсказки
     $('.tooltipped').tooltip({delay: 50});
 
+    // Загрузка файлов
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Перетягніть файл або натисніть сюди',
+            'replace': 'Перетягніть або натисніть, щоб замінити',
+            'remove':  'Видалити',
+            'error':   'Упс, щось пішло не так.'
+        },
+        error: {
+            'fileSize': 'Файл занадто великий. Максимальний розмір {{ value }}b.',
+            'minWidth': 'The image width is too small ({{ value }}}px min).',
+            'maxWidth': 'The image width is too big ({{ value }}}px max).',
+            'minHeight': 'The image height is too small ({{ value }}}px min).',
+            'maxHeight': 'The image height is too big ({{ value }}px max).',
+            'fileExtension': 'Дозволяються тільки такі формати: ({{ value }}).'
+        }
+    });
 
 
 });

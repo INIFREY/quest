@@ -62,6 +62,20 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'ftp.example.com',
+            'username' => 'ваш-логин',
+            'password' => 'ваш-пароль',
+
+            // Необязательные настройки FTP...
+            // 'port'     => 21,
+            // 'root'     => '',
+            // 'passive'  => true,
+            // 'ssl'      => true,
+            // 'timeout'  => 30,
+        ],
+
     ],
 
 ];
