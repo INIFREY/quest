@@ -489,7 +489,18 @@ $( document ).ready(function(){
                 processData: false, // важно - убираем преобразование строк по умолчанию
                 data: new FormData($(form)[0]),
                 success: function(data) {
-                    if (data.status=='success') swal("Готово!", "Ваше фото успішно завантажено!", "success");
+                    if (data.status=='success') swal({ title: "Готово!",
+                        text:"Ваше фото успішно завантажено!",
+                        type: "success",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function(){
+                        if (data.money=='success') {
+                            $('#coinsEditPhoto').hide();
+                            swal("Вам нараховано "+data.moneyCount+" монет");
+                        }
+                        else swal.close();
+                    });
                     else {
                         var text = data.msg || "";
                         swal("Помилка!", text, "error");

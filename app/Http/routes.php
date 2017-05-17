@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
     Route::post('/profile/edit/general', 'Profile\ProfileController@editGeneral')->name('profileEditGeneral'); // Редактировать основные настройки
     Route::post('/profile/edit/photo', 'Profile\ProfileController@editPhoto')->name('profileEditPhoto'); // Редактировать основные настройки
     Route::post('/profile/edit/password', 'Profile\ProfileController@editPassword')->name('profileEditPassword'); // Редактировать пароль
+    Route::post('/profile/edit/social', 'Profile\ProfileController@editSocial')->name('profileEditSocial'); // Редактировать ссылки на соц. сети
 
 });
 

@@ -78,18 +78,62 @@ class ProfileController extends Controller
     public function editPhoto(Request $request){
         if(!$request->ajax()) return redirect('/');
 
+        $user = Auth::user();
+
+        if (!$request->file('photo')){
+            $user->avatar = "";
+            $user->save();
+            return ['status'=>'success'];
+        }
+
         $this->validate($request, [
-            'photo' => 'required|max:2050|image'
+            'photo' => 'max:2050|image'
         ]);
 
         $avatar = $request->file('photo');
+        $fileName = $user->id.".".$avatar->getClientOriginalExtension();
 
-        Storage::disk('public')->put(
-            'avatars/'.Auth::user()->id.".".$avatar->getClientOriginalExtension(),
+        Storage::disk('img')->put(
+            'avatars/'.$fileName,
             file_get_contents($avatar->getRealPath())
         );
 
+        $user->avatar = $fileName;
+        $user->save();
+
         $result = ['status'=>'success'];
+        if (Storage::disk('img')->exists('avatars/'.$fileName) && !$user->wasEarlierCoin("editPhoto")) {
+            $user->sendCoins("5", "editPhoto");
+            $result['money']='success';
+            $result['moneyCount']='5';
+        }
+
+
+        return $result;
+    }
+
+    public function editSocial(Request $request)
+    {
+        if(!$request->ajax()) return redirect('/');
+
+        $this->validate($request, [
+            'vk' => 'max:255|active_url|regex:/vk.com/',
+            'fb' => 'max:255|active_url|regex:/facebook.com/',
+            'tw' => 'max:255|active_url|regex:/twitter.com/'
+        ]);
+
+        $user = Auth::user(); // Получаем авторизированного пользователя
+        $user->vkontakte  = explode("vk.com/", $request->input('vk'))[0];
+        $user->facebook  = explode("facebook.com/", $request->input('fb'))[0];
+        $user->twitter  = explode("twitter.com/", $$request->input('tw'))[0];
+        $user->save();
+
+        $result = ['status'=>'success'];
+        if( $request->input('vk')!="" && $request->input('fb')!="" && $request->input('tw')!="" && !$user->wasEarlierCoin("editSocial")) {
+            $user->sendCoins("5", "editSocial");
+            $result['money']='success';
+            $result['moneyCount']='5';
+        }
         return $result;
     }
 

@@ -42,7 +42,7 @@
                               id="changeProfilePhotoForm" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="input-field">
-                                <input id="photo" name="photo" type="file" class="dropify" data-show-remove="false" data-max-file-size="2M" data-allowed-file-extensions="jpg png jpeg"/>
+                                <input id="photo" name="photo" type="file" class="dropify"  data-max-file-size="2M" data-allowed-file-extensions="jpg png jpeg" {{$user->hasAvatar()?'data-default-file='.$user->getAvatarUrl():''}} />
                             </div>
 
                             <div class="input-field">
@@ -52,6 +52,43 @@
                             </div>
                         </form>
                     </li>
+
+                    <li>
+                        <div class="collapsible-header teal white-text">Соц. мережі
+                            @if (!$user->wasEarlierCoin("editSocial"))
+                                <span id="coinsEditSocial" class="new badge red tooltipped" data-tooltip="Отримаєте, якщо заповните усі поля"  data-position="top" data-badge-caption="монет">+5</span>
+                            @endif
+                        </div>
+                        <form class="collapsible-body teal lighten-5" method="POST" action="{{route('profileEditSocial')}} "
+                              id="changeProfileSocialForm">
+                            {{ csrf_field() }}
+                            <div class="input-field">
+                                <i class="fa fa-vk prefix"></i>
+                                <input id="vk" name="vk" type="text" value="{{$user->getSocUrl("vk")}}" placeholder="https://vk.com/..."
+                                       class="{{ $errors->has('vk') ? 'invalid' : '' }}">
+                                <label for="vk">ВКонтакте</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="fa fa-facebook prefix"></i>
+                                <input id="fb" name="fb" type="text" value="{{$user->getSoc("fb")}}" placeholder="https://facebook.com/..."
+                                       class="{{ $errors->has('fb') ? 'invalid' : '' }}">
+                                <label for="fb">Facebook</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="fa fa-twitter prefix"></i>
+                                <input id="tw" name="tw" type="text" value="{{$user->twitter}}" placeholder="https://twitter.com/..."
+                                       class="{{ $errors->has('tw') ? 'invalid' : '' }}">
+                                <label for="tw">Twitter</label>
+                            </div>
+
+                            <div class="input-field">
+                                <button type="submit" class="btn waves-effect waves-light teal lighten-1">
+                                    Зберегти <i class="material-icons right">save</i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+
                 </ul>
             </div>
 

@@ -7,12 +7,12 @@
             <div class="col m4 s12">
                 <div class="card">
                     <div  class="card-content center-align">
-                        <img src="http://www.android-gameworld.ru/noavatar.png" alt="Login" class="circle profile-image z-depth-3">
+                        <img src="{{$user->getAvatarUrl()}}" alt="Login" class="circle profile-image z-depth-3">
                         <div class="profile-name">{{$user->name}}</div>
                         <hr class="light">
-                        <div class="">Рейтинг: 100 балів</div>
+                        <div class="">Рейтинг: {{$user->points}} балів</div>
                         <div class="progress">
-                            <div class="determinate" style="width: 70%"></div>
+                            <div class="determinate" style="width: {{$user->getPercentPoints()}}%"></div>
                         </div>
                     </div>
                     <div class="collection profile-actions center-align">
@@ -29,9 +29,15 @@
                             <div>Про себе: {{$user->about}}</div>
                         @endif
                         <div class="profile-social">
-                            <a href="#!" target="_blank"><i class="fa fa-vk"></i></a>
-                            <a href="#!" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="#!" target="_blank"><i class="fa fa-twitter"></i></a>
+                            @if ($user->getSoc("vk"))
+                                <a href="{{$user->getSocUrl("vk")}}" target="_blank"><i class="fa fa-vk"></i></a>
+                            @endif
+                            @if ($user->getSoc("fb"))
+                                    <a href="{{$user->getSocUrl("fb")}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                            @endif
+                            @if ($user->getSoc("tw"))
+                                    <a href="{{$user->getSocUrl("tw")}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
                         <div class="card-content col s6">
                             <div class="card-title">
                                 <i class="fa fa-money"></i>
-                                50
+                                {{$user->money}}
                             </div>
                             <div class="medium-small grey-text">Гривень</div>
                         </div>
