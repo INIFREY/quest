@@ -14,8 +14,10 @@ class AdminController extends Controller
     }
 
     public function index(){
-        setlocale(LC_TIME, 'uk-UA.utf8');
-        $tt = Carbon::now()->formatLocalized('%A %d %B %Y');
-        return view('admin.dashboard', ['admin'=>Auth::guard('admin')->user(), 't'=>$tt]);
+        return view('admin.dashboard', ['admin'=>Auth::guard('admin')->user()]);
+    }
+
+    public function users(){
+        return view('admin.users', ['admin'=>Auth::guard('admin')->user()]);
     }
 }

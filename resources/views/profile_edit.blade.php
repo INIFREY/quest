@@ -70,13 +70,13 @@
                             </div>
                             <div class="input-field">
                                 <i class="fa fa-facebook prefix"></i>
-                                <input id="fb" name="fb" type="text" value="{{$user->getSoc("fb")}}" placeholder="https://facebook.com/..."
+                                <input id="fb" name="fb" type="text" value="{{$user->getSocUrl("fb")}}" placeholder="https://facebook.com/..."
                                        class="{{ $errors->has('fb') ? 'invalid' : '' }}">
                                 <label for="fb">Facebook</label>
                             </div>
                             <div class="input-field">
                                 <i class="fa fa-twitter prefix"></i>
-                                <input id="tw" name="tw" type="text" value="{{$user->twitter}}" placeholder="https://twitter.com/..."
+                                <input id="tw" name="tw" type="text" value="{{$user->getSocUrl("tw")}}" placeholder="https://twitter.com/..."
                                        class="{{ $errors->has('tw') ? 'invalid' : '' }}">
                                 <label for="tw">Twitter</label>
                             </div>

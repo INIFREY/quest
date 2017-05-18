@@ -25,9 +25,10 @@ $(function() {
         }],
         dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
         language: {
-            search: '<span>Filter:</span> _INPUT_',
-            lengthMenu: '<span>Show:</span> _MENU_',
-            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+            search: '<span>Фільтр:</span> _INPUT_',
+            lengthMenu: '<span>Показати:</span> _MENU_',
+            info: "Показано _START_-_END_ із _TOTAL_ елементів",
+            paginate: { 'first': 'Перша', 'last': 'Остання', 'next': '&rarr;', 'previous': '&larr;' }
         },
         drawCallback: function () {
             $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
@@ -69,7 +70,7 @@ $(function() {
     // ------------------------------
 
     // Add placeholder to the datatable filter option
-    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
+    $('.dataTables_filter input[type=search]').attr('placeholder','Пошук по таблиці...');
 
 
     // Enable Select2 select for the length option

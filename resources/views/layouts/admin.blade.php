@@ -9,20 +9,20 @@
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/bootstrap.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/core.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/components.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/colors.css')}}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
-    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="{{url('assets/js/plugins/loaders/pace.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('assets/js/core/libraries/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('assets/js/core/libraries/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('assets/js/plugins/loaders/blockui.min.js')}}"></script>
 
-    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script type="text/javascript" src="{{url('assets/js/core/app.js')}}"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
@@ -36,7 +36,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.html"><img src="assets/images/logo_light.png" alt=""></a>
+        <a class="navbar-brand" href="{{url('/admin')}}"><img src="{{url('assets/images/logo_light.png')}}" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -133,7 +133,7 @@
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="assets/images/placeholder.jpg" alt="">
+                    <img src="{{url('assets/images/placeholder.jpg')}}" alt="">
                     <span>{{$admin->name}}</span>
                     <i class="caret"></i>
                 </a>
@@ -165,7 +165,7 @@
                 <div class="sidebar-user">
                     <div class="category-content">
                         <div class="media">
-                            <a href="#" class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+                            <a href="#" class="media-left"><img src="{{url('assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt=""></a>
                             <div class="media-body">
                                 <span class="media-heading text-semibold">{{$admin->name}} {{$admin->surname}}</span>
                                 <div class="text-size-mini text-muted">
@@ -193,8 +193,8 @@
 
                             <!-- Main -->
                             <li class="navigation-header"><span>Основні</span> <i class="icon-menu" title="Основні"></i></li>
-                            <li class="active"><a href=""><i class="icon-home4"></i> <span>Головна</span></a></li>
-                            <li><a href=""><i class="icon-home4"></i> <span>Користувачі</span></a></li>
+                            <li id="navMain"><a href="{{url("/admin")}}"><i class="icon-home4"></i> <span>Головна</span></a></li>
+                            <li id="navUsers"><a href="{{url("/admin/users")}}"><i class="icon-home4"></i> <span>Користувачі</span></a></li>
                             <li><a href=""><i class="icon-home4"></i> <span>Адміністратори</span></a></li>
 
 
@@ -275,6 +275,9 @@
 
 </div>
 
+<script>
+    $('.navigation-main #@yield('navId')').addClass('active');
+</script>
 
 </body>
 </html>

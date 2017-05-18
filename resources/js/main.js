@@ -59,6 +59,19 @@ $( document ).ready(function(){
         return this.optional(element) || value.replace(/\s/g,'')!='';
     }, "В полі не можуть бути тільки пробіли!");
 
+    $.validator.addMethod("vk", function(value, element) {
+        return this.optional(element) || /vk.com/.test(value);
+    }, "Тут має бути посилання на vk.");
+
+    $.validator.addMethod("fb", function(value, element) {
+        return this.optional(element) || /facebook.com/.test(value);
+    }, "Тут має бути посилання на facebook.");
+
+    $.validator.addMethod("tw", function(value, element) {
+        return this.optional(element) || /twitter.com/.test(value);
+    }, "Тут має бути посилання на twitter.");
+
+
     $("#registerForm").validate({
         rules: {
             name: {
@@ -460,8 +473,90 @@ $( document ).ready(function(){
 
     $("#changeProfilePhotoForm").validate({
         rules: {
-            photo: {
-                required: true
+            
+        },
+        messages: {
+
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorClass: 'invalid',
+        focusInvalid: false,
+        submitHandler: function(form) {
+            $('#loader').show();
+            $.ajax({
+                url: form.action,
+                type: form.method,
+
+                contentType: false, // важно - убираем форматирование данных по умолчанию
+                processData: false, // важно - убираем преобразование строк по умолчанию
+                data: new FormData($(form)[0]),
+                success: function(data) {
+                    $('#loader').hide();
+                    if (data.status=='success') swal({ title: "Готово!",
+                        text:"Ваше фото успішно завантажено!",
+                        type: "success",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function(){
+                        if (data.money=='success') {
+                            $('#coinsEditPhoto').hide();
+                            swal("Вам нараховано "+data.moneyCount+" монет");
+                        }
+                        else swal.close();
+                    });
+                    else {
+                        var text = data.msg || "";
+                        swal("Помилка!", text, "error");
+                        console.log(data);
+                    }
+                },
+                error: function(data) {
+                    $('#loader').hide();
+                    var errors = data.responseJSON;
+                    if (errors){
+                        for(var e in errors) {
+                            swal("Помилка!", errors[e][0], "error");
+                            break;
+                        }
+                    }
+                    else{
+                        swal("Помилка!", "", "error");
+                        console.log(data);
+                    }
+
+                }
+            });
+        }
+    });
+
+    /********************** *************************************************/
+    /*********          Форма редактирования соц. сетей          ************/
+    /********************** *************************************************/
+
+    $("#changeProfileSocialForm").validate({
+        rules: {
+            vk: {
+                minlength: 2,
+                maxlength: 255,
+                vk: true
+            },
+            fb: {
+                minlength: 2,
+                maxlength: 255,
+                fb: true
+            },
+            tw: {
+                minlength: 2,
+                maxlength: 255,
+                tw: true
             }
         },
         messages: {
@@ -479,24 +574,19 @@ $( document ).ready(function(){
         errorClass: 'invalid',
         focusInvalid: false,
         submitHandler: function(form) {
-
-
             $.ajax({
                 url: form.action,
                 type: form.method,
-
-                contentType: false, // важно - убираем форматирование данных по умолчанию
-                processData: false, // важно - убираем преобразование строк по умолчанию
-                data: new FormData($(form)[0]),
+                data: $(form).serialize(),
                 success: function(data) {
                     if (data.status=='success') swal({ title: "Готово!",
-                        text:"Ваше фото успішно завантажено!",
+                        text:"Ваші дані успішно змінено!",
                         type: "success",
                         closeOnConfirm: false,
                         closeOnCancel: false
                     }, function(){
                         if (data.money=='success') {
-                            $('#coinsEditPhoto').hide();
+                            $('#coinsEditSocial').hide();
                             swal("Вам нараховано "+data.moneyCount+" монет");
                         }
                         else swal.close();
@@ -519,7 +609,6 @@ $( document ).ready(function(){
                         swal("Помилка!", "", "error");
                         console.log(data);
                     }
-
                 }
             });
         }

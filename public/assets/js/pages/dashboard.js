@@ -26,7 +26,7 @@ $(function() {
     // Daterange picker
     // ------------------------------
 
-    $('.daterange-ranges').daterangepicker(
+    /*$('.daterange-ranges').daterangepicker(
         {
             startDate: moment().subtract('days', 29),
             endDate: moment(),
@@ -51,7 +51,7 @@ $(function() {
         }
     );
 
-    $('.daterange-ranges span').html(moment().subtract('days', 29).format('MMMM D') + ' - ' + moment().format('MMMM D'));
+    $('.daterange-ranges span').html(moment().subtract('days', 29).format('MMMM D') + ' - ' + moment().format('MMMM D'));*/
 
 
 
@@ -901,7 +901,7 @@ $(function() {
     // App sales heatmap chart
     // ------------------------------
 
-    salesHeatmap(); // initialize chart
+//    salesHeatmap(); // initialize chart
 
     // Chart setup
     function salesHeatmap() {
@@ -1515,7 +1515,7 @@ $(function() {
     // Messages area chart
     // ------------------------------
 
-    messagesArea("#messages-stats", 40, '#5C6BC0'); // initialize chart
+  //  messagesArea("#messages-stats", 40, '#5C6BC0'); // initialize chart
 
     // Chart setup
     function messagesArea(element, height, color) {
@@ -1675,10 +1675,10 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    sparkline("#new-visitors", "line", 30, 35, "basis", 750, 2000, "#26A69A");
-    sparkline("#new-sessions", "line", 30, 35, "basis", 750, 2000, "#FF7043");
-    sparkline("#total-online", "line", 30, 35, "basis", 750, 2000, "#5C6BC0");
-    sparkline("#server-load", "area", 30, 50, "basis", 750, 2000, "rgba(255,255,255,0.5)");
+//    sparkline("#new-visitors", "line", 30, 35, "basis", 750, 2000, "#26A69A");
+//    sparkline("#new-sessions", "line", 30, 35, "basis", 750, 2000, "#FF7043");
+//    sparkline("#total-online", "line", 30, 35, "basis", 750, 2000, "#5C6BC0");
+//    sparkline("#server-load", "area", 30, 50, "basis", 750, 2000, "rgba(255,255,255,0.5)");
 
     // Chart setup
     function sparkline(element, chartType, qty, height, interpolation, duration, interval, color) {
@@ -1906,7 +1906,7 @@ $(function() {
     // Daily revenue line chart
     // ------------------------------
 
-    dailyRevenue('#today-revenue', 50); // initialize chart
+//    dailyRevenue('#today-revenue', 50); // initialize chart
 
     // Chart setup
     function dailyRevenue(element, height) {
@@ -2264,8 +2264,8 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    progressMeter("#today-progress", 20, 20, '#7986CB');
-    progressMeter("#yesterday-progress", 20, 20, '#7986CB');
+ //   progressMeter("#today-progress", 20, 20, '#7986CB');
+ //   progressMeter("#yesterday-progress", 20, 20, '#7986CB');
 
     // Chart setup
     function progressMeter(element, width, height, color) {
@@ -2358,7 +2358,7 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    campaignDonut("#campaigns-donut", 42);
+ //   campaignDonut("#campaigns-donut", 42);
 
     // Chart setup
     function campaignDonut(element, size) {
@@ -2523,7 +2523,7 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    campaignStatusPie("#campaign-status-pie", 42);
+ //   campaignStatusPie("#campaign-status-pie", 42);
 
     // Chart setup
     function campaignStatusPie(element, size) {
@@ -2693,7 +2693,7 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    ticketStatusDonut("#tickets-status", 42);
+//    ticketStatusDonut("#tickets-status", 42);
 
     // Chart setup
     function ticketStatusDonut(element, size) {
@@ -2858,9 +2858,9 @@ $(function() {
     // ------------------------------
 
     // Initialize charts
-    generateBarChart("#hours-available-bars", 24, 40, true, "elastic", 1200, 50, "#EC407A", "hours");
-    generateBarChart("#goal-bars", 24, 40, true, "elastic", 1200, 50, "#5C6BC0", "goal");
-    generateBarChart("#members-online", 24, 50, true, "elastic", 1200, 50, "rgba(255,255,255,0.5)", "members");
+//    generateBarChart("#hours-available-bars", 24, 40, true, "elastic", 1200, 50, "#EC407A", "hours");
+//    generateBarChart("#goal-bars", 24, 40, true, "elastic", 1200, 50, "#5C6BC0", "goal");
+//    generateBarChart("#members-online", 24, 50, true, "elastic", 1200, 50, "rgba(255,255,255,0.5)", "members");
 
     // Chart setup
     function generateBarChart(element, barQty, height, animate, easing, duration, delay, color, tooltip) {
@@ -3080,8 +3080,8 @@ $(function() {
     // ------------------------------
 
     // Initialize charts
-    progressCounter('#hours-available-progress', 38, 2, "#F06292", 0.68, "icon-watch text-pink-400", 'Hours available', '64% average')
-    progressCounter('#goal-progress', 38, 2, "#5C6BC0", 0.82, "icon-trophy3 text-indigo-400", 'Productivity goal', '87% average')
+//    progressCounter('#hours-available-progress', 38, 2, "#F06292", 0.68, "icon-watch text-pink-400", 'Hours available', '64% average')
+//    progressCounter('#goal-progress', 38, 2, "#5C6BC0", 0.82, "icon-trophy3 text-indigo-400", 'Productivity goal', '87% average')
 
     // Chart setup
     function progressCounter(element, radius, border, color, end, iconClass, textTitle, textAverage) {
@@ -3217,7 +3217,7 @@ $(function() {
     // ------------------------------
 
     // Initialize chart
-    bulletChart("#bullets", 80);
+//    bulletChart("#bullets", 80);
 
     // Chart setup
     function bulletChart(element, height) {

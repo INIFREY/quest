@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Головна')
+@section('navId', 'navMain')
 
 @section('ThemeJS')
     <script type="text/javascript" src="assets/js/plugins/visualization/d3/d3.min.js"></script>
@@ -72,6 +73,8 @@
 
         </div>
     </div>
+
+
 @endsection
 
 

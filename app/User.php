@@ -90,7 +90,7 @@ class User extends Authenticatable
     public function hasAvatar(){
         if (!$this->avatar) return false;
 
-        if (Storage::disk('public')->exists('avatars/'.$this->avatar)) return true;
+        if (Storage::disk('img')->exists('avatars/'.$this->avatar)) return true;
         else return false;
     }
 

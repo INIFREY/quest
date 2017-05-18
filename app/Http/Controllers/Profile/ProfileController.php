@@ -91,7 +91,7 @@ class ProfileController extends Controller
         ]);
 
         $avatar = $request->file('photo');
-        $fileName = $user->id.".".$avatar->getClientOriginalExtension();
+        $fileName = rand(1000, 9999).$user->id.".jpg";
 
         Storage::disk('img')->put(
             'avatars/'.$fileName,
@@ -117,15 +117,15 @@ class ProfileController extends Controller
         if(!$request->ajax()) return redirect('/');
 
         $this->validate($request, [
-            'vk' => 'max:255|active_url|regex:/vk.com/',
-            'fb' => 'max:255|active_url|regex:/facebook.com/',
-            'tw' => 'max:255|active_url|regex:/twitter.com/'
+            'vk' => 'max:255|regex:/vk.com/',
+            'fb' => 'max:255|regex:/facebook.com/',
+            'tw' => 'max:255|regex:/twitter.com/'
         ]);
 
         $user = Auth::user(); // Получаем авторизированного пользователя
-        $user->vkontakte  = explode("vk.com/", $request->input('vk'))[0];
-        $user->facebook  = explode("facebook.com/", $request->input('fb'))[0];
-        $user->twitter  = explode("twitter.com/", $$request->input('tw'))[0];
+        $user->vkontakte  = $request->input('vk') ?  explode("vk.com/", $request->input('vk'))[1] : "";
+        $user->facebook  = $request->input('fb') ?  explode("facebook.com/", $request->input('fb'))[1] : "";
+        $user->twitter  = $request->input('tw') ?  explode("twitter.com/", $request->input('tw'))[1] : "";
         $user->save();
 
         $result = ['status'=>'success'];
