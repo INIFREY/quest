@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\User;
+use App\Admin;
+
+class AjaxController extends Controller
+{
+    public function __construct(){
+        $this->middleware('admin');
+    }
+
+    public function index(){
+
+    }
+
+    public function users(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $users = User::all();
+        return view('admin.ajax.users_table', ['users'=>$users]);
+    }
+
+    public function admins(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $admins = Admin::all();
+        return view('admin.ajax.admins_table', ['admins'=>$admins]);
+    }
+
+    public function adminEdit(Request $request, $id){
+        if(!$request->ajax()) return redirect('/');
+        if ($id=="no") $target=false;
+        else $target = Admin::findOrFail($id);
+
+        return view('admin.ajax.admin_form', ['target'=>$target]);
+    }
+}

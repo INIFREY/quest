@@ -93,6 +93,8 @@ class ProfileController extends Controller
         $avatar = $request->file('photo');
         $fileName = rand(1000, 9999).$user->id.".jpg";
 
+        if($user->hasAvatar()) Storage::disk('img')->delete('avatars/'.$user->avatar);
+
         Storage::disk('img')->put(
             'avatars/'.$fileName,
             file_get_contents($avatar->getRealPath())
@@ -129,7 +131,7 @@ class ProfileController extends Controller
         $user->save();
 
         $result = ['status'=>'success'];
-        if( $request->input('vk')!="" && $request->input('fb')!="" && $request->input('tw')!="" && !$user->wasEarlierCoin("editSocial")) {
+        if( $user->vkontakte!="" && $user->facebook!="" && $user->twitter!="" && !$user->wasEarlierCoin("editSocial")) {
             $user->sendCoins("5", "editSocial");
             $result['money']='success';
             $result['moneyCount']='5';

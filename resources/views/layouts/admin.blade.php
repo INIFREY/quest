@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - Адмінпанель</title>
 
     <!-- Global stylesheets -->
@@ -195,7 +196,7 @@
                             <li class="navigation-header"><span>Основні</span> <i class="icon-menu" title="Основні"></i></li>
                             <li id="navMain"><a href="{{url("/admin")}}"><i class="icon-home4"></i> <span>Головна</span></a></li>
                             <li id="navUsers"><a href="{{url("/admin/users")}}"><i class="icon-home4"></i> <span>Користувачі</span></a></li>
-                            <li><a href=""><i class="icon-home4"></i> <span>Адміністратори</span></a></li>
+                            <li id="navAdmins"><a href="{{url("/admin/admins")}}"><i class="icon-home4"></i> <span>Адміністратори</span></a></li>
 
 
                             <li><a href="changelog.html"><i class="icon-list-unordered"></i> <span>Changelog <span class="label bg-blue-400">1.5</span></span></a></li>

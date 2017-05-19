@@ -49,5 +49,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
         Route::get('/', 'AdminController@index');
         Route::get('/logout','AuthController@logout');
         Route::get('/users', 'AdminController@users');
+        Route::get('/admins', 'AdminController@admins');
+
+        Route::post('/ajax/users', 'AjaxController@users');
+        Route::post('/ajax/admins', 'AjaxController@admins');
+        Route::post('/ajax/edit/admin/{id}', 'AjaxController@adminEdit');
     });
 });
