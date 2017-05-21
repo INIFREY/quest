@@ -37,6 +37,7 @@
                                 <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
                             <li><a href="{{url('/profile')}}"><i class="material-icons">person</i>Профіль</a></li>
+                            <li><a href="{{url('/quests')}}"><i class="material-icons">whatshot</i>Квести</a></li>
                             <li class="divider"></li>
                             <li><a href="{{url('/logout')}}"><i class="material-icons">exit_to_app</i>Вихід</a></li>
                         </ul>
@@ -60,6 +61,7 @@
                                     <div class="collapsible-body" style="">
                                         <ul>
                                             <li><a href="{{url('/profile')}}">Профіль</a></li>
+                                            <li><a href="{{url('/quests')}}">Квести</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ url('/logout') }}">Вихід</a></li>
                                         </ul>

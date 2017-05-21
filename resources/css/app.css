@@ -133,6 +133,39 @@ hr.light {
 .profileEdit #changeProfilePhotoForm #photo-error {
   margin-top: 60px; }
 
+#loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 100500;
+  display: none; }
+  #loader .preloader-wrapper {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 48%;
+    top: 48%;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px); }
+
+.quests .quests-img {
+  display: inline-block;
+  margin-right: 10px; }
+
+.quests .quest-content {
+  display: inline-block;
+  vertical-align: top;
+  width: 75%; }
+
+.quests .quest-info {
+  margin-top: 15px;
+  margin-bottom: 10px; }
+  .quests .quest-info a.btn {
+    margin-left: 15px; }
+
 @media only screen and (max-width: 992px) {
   .nav-wrapper .brand-logo {
     margin: 0; } }

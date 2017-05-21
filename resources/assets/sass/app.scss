@@ -204,3 +204,24 @@ hr.light{
     top: calc(50% - 50px);
   }
 }
+
+.quests{
+  .quests-img{
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .quest-content{
+    display: inline-block;
+    vertical-align: top;
+    width: 75%;
+  }
+
+  .quest-info{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    a.btn{
+      margin-left: 15px;
+    }
+  }
+}

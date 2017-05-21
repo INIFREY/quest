@@ -23,7 +23,7 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#!" class="editAdmin" data-toggle="modal" data-target="#adminForm" data-id="{{$admin->id}}" ><i class="icon-file-pdf"></i> Редагувати</a></li>
+                            <li><a href="#!" class="editAdmin"  data-id="{{$admin->id}}" ><i class="icon-file-pdf"></i> Редагувати</a></li>
                             <li><a href="#"><i class="icon-file-excel"></i> Видалити</a></li>
                         </ul>
                     </li>

@@ -34,7 +34,7 @@ class AjaxController extends Controller
 
     public function adminEdit(Request $request, $id){
         if(!$request->ajax()) return redirect('/');
-        if ($id=="no") $target=false;
+        if ($id=="no") $target=null;
         else $target = Admin::findOrFail($id);
 
         return view('admin.ajax.admin_form', ['target'=>$target]);

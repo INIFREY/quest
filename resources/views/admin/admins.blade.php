@@ -18,7 +18,7 @@
             <h5 class="panel-title">Таблиця адміністраторів<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a class="editAdmin" data-toggle="modal" data-target="#adminForm" data-id="no" title="Додати"><i class="icon-add"></i></a></li>
+                    <li><a class="editAdmin" data-id="no" title="Додати"><i class="icon-add"></i></a></li>
                     <li><a data-action="reload" data-type="admins"></a></li>
                 </ul>
             </div>
@@ -32,15 +32,31 @@
 
     <script>
         $('.editAdmin').click(function () {
+            var block = ".content-wrapper";
+            $(block).block({
+                message: '<i class="icon-spinner2 spinner"></i>',
+                overlayCSS: {
+                    backgroundColor: '#fff',
+                    opacity: 0.8,
+                    cursor: 'wait',
+                    'box-shadow': '0 0 0 1px #ddd'
+                },
+                css: {
+                    border: 0,
+                    padding: 0,
+                    backgroundColor: 'none'
+                }
+            });
             $.ajax({
                 url: "http://game.wevudu.com/admin/ajax/edit/admin/"+$(this).data("id"),
                 type: "POST",
                 success: function(data) {
-                    $('#adminForm').html(data);
-                    console.log(data);
+                    $('#adminForm').html(data).modal('show');
+                    $(block).unblock();
                 },
                 error: function (data) {
                     console.log(data);
+                    $(block).unblock();
                 }
             });
         });

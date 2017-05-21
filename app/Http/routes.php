@@ -31,6 +31,11 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
     Route::post('/profile/edit/password', 'Profile\ProfileController@editPassword')->name('profileEditPassword'); // Редактировать пароль
     Route::post('/profile/edit/social', 'Profile\ProfileController@editSocial')->name('profileEditSocial'); // Редактировать ссылки на соц. сети
 
+    Route::get('/quests', 'QuestController@showList'); // Просмотр списка квестов
+    Route::get('/quest/{id}', 'QuestController@index'); // Просмотр квеста
+
+    Route::get('/play/{id}', 'QuestController@play'); // Игра
+
 });
 
 Route::get('/email/sendActivate', 'Profile\EmailController@sendActivate'); // Отправка письма активации
