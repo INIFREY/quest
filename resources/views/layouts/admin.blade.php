@@ -198,22 +198,12 @@
                             <li id="navUsers"><a href="{{url("/admin/users")}}"><i class="icon-home4"></i> <span>Користувачі</span></a></li>
                             <li id="navAdmins"><a href="{{url("/admin/admins")}}"><i class="icon-home4"></i> <span>Адміністратори</span></a></li>
 
-
-                            <li><a href="changelog.html"><i class="icon-list-unordered"></i> <span>Changelog <span class="label bg-blue-400">1.5</span></span></a></li>
                             <!-- /main -->
 
                             <!-- Квести -->
                             <li class="navigation-header"><span>Квести</span> <i class="icon-menu" title="Квести"></i></li>
-                            <li>
-                                <a href="#"><i class="icon-stack2"></i> <span>Перегляд</span></a>
-                                <ul>
-                                    <li><a href="#!">Перший</a></li>
-                                    <li class="navigation-divider"></li>
-                                    <li><a href="#!">Інші</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="#!"><i class="icon-width"></i> <span>Додати новий</span></a></li>
+                            <li id="navQuests"><a href="{{url("/admin/quests")}}"><i class="icon-stack2"></i> <span>Список</span></a></li>
+                            <li id="navQuest" ><a href="{{url("/admin/quest/new")}}"><i class="icon-width"></i> <span>Додати новий</span></a></li>
                             <!-- /Квести -->
 
                         </ul>

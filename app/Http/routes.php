@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
 
     Route::get('/quests', 'QuestController@showList'); // Просмотр списка квестов
     Route::get('/quest/{id}', 'QuestController@index'); // Просмотр квеста
-
     Route::get('/play/{id}', 'QuestController@play'); // Игра
 
 });
@@ -55,9 +54,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
         Route::get('/logout','AuthController@logout');
         Route::get('/users', 'AdminController@users');
         Route::get('/admins', 'AdminController@admins');
+        Route::get('/quests', 'AdminController@quests');
+        Route::post('/quest/{id}', 'AdminController@editQuest');
+        Route::get('/quest/{id}', 'AdminController@quest');
+        Route::get('/quest/{id}/tasks', 'AdminController@tasks');
 
         Route::post('/ajax/users', 'AjaxController@users');
         Route::post('/ajax/admins', 'AjaxController@admins');
         Route::post('/ajax/edit/admin/{id}', 'AjaxController@adminEdit');
+        Route::post('/ajax/quests', 'AjaxController@quests');
+        Route::post('/ajax/tasks', 'AjaxController@tasks');
     });
 });

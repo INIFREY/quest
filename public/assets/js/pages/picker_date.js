@@ -109,6 +109,35 @@ $(function() {
         }
     });
 
+    $('#start_date, #end_date').daterangepicker({
+        applyClass: 'bg-slate-600',
+        cancelClass: 'btn-default',
+        singleDatePicker: true,
+        timePicker: true,
+        timePicker24Hour: true,
+
+        ranges: {
+            'Сьогодні': [moment(), moment()],
+            'Вчера': [moment().subtract('days', 1), moment().subtract('days', 1)],
+            'Последние 7 дней': [moment().subtract('days', 6), moment()],
+            'Последние 30 дней': [moment().subtract('days', 29), moment()],
+            'Этот месяц': [moment().startOf('month'), moment().endOf('month')],
+            'Прошедший месяц': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+        },
+        locale: {
+            applyLabel: 'Вперед',
+            cancelLabel: 'Отмена',
+            startLabel: 'Начальная дата',
+            endLabel: 'Конечная дата',
+            customRangeLabel: 'Выбрать дату',
+            daysOfWeek: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт','Сб'],
+            monthNames: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'],
+            firstDay: 1,
+            format: 'DD.MM.YYYY HH:mm',
+            formatSubmit: 'YYYY-MM-dd HH:mm:ss'
+        }
+    });
+
 
     //
     // Pre-defined ranges and callback

@@ -9,6 +9,8 @@ use Carbon\Carbon;
 class Quest extends Model
 {
 
+    protected $guarded = ['id'];
+
     /**
      * @param $id //пользователя
      * @return bool
@@ -16,7 +18,7 @@ class Quest extends Model
      * Если пользователь записан на квест (оплатил) - возвращает true
      */
     public function isPlayer($id){
-        $isPlayer = DB::table('quest_players')->where('quest_id', $this->id)->where('user_id', $id)->first();;
+        $isPlayer = DB::table('quest_players')->where('quest_id', $this->id)->where('user_id', $id)->first();
 
         if($isPlayer) return true;
         else return false;
@@ -30,5 +32,13 @@ class Quest extends Model
         $start = Carbon::parse($this->start_date);
         $end = $this->end_date ? Carbon::parse($this->end_date) : Carbon::tomorrow();
         return  $now->between($start, $end);
+    }
+
+    /**
+     * Возвращает список заданий для этого квеста
+     */
+    public function allTasks(){
+        $tasks =  DB::table('quest_tasks')->where('quest_id', $this->id)->get();
+        return $tasks;
     }
 }

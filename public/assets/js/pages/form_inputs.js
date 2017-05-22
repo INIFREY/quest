@@ -13,13 +13,17 @@ $(function() {
 
 	// Default file input style
 	$(".file-styled").uniform({
-		fileButtonClass: 'action btn btn-default'
+		fileButtonClass: 'action btn btn-default',
+		fileDefaultHtml: "Нічого не вибрано",
+		fileButtonHtml: "Вибрати"
 	});
 
 
 	// Primary file input
 	$(".file-styled-primary").uniform({
-		fileButtonClass: 'action btn bg-blue'
+		fileButtonClass: 'action btn bg-blue',
+		fileDefaultHtml: "Нічого не вибрано",
+		fileButtonHtml: "Вибрати"
 	});
 
 });

@@ -62,4 +62,8 @@ $(function() {
         fileButtonClass: 'action btn bg-warning-400'
     });
 
+    $('.summernote').each( function() {
+        $(this).val($(this).code());
+    });
+
 });

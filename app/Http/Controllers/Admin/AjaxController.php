@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Quest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -39,4 +40,12 @@ class AjaxController extends Controller
 
         return view('admin.ajax.admin_form', ['target'=>$target]);
     }
+
+    public function quests(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $quests = Quest::all();
+        return view('admin.ajax.quests_table', ['quests'=>$quests]);
+    }
+
+    
 }
