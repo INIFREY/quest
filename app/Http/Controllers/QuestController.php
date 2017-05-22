@@ -28,4 +28,12 @@ class QuestController extends Controller
 
         return view('play', ['quest'=>$quest]);
     }
+
+    public function payCoins(Request $request){
+        if(!$request->ajax()) return redirect('/');
+
+        dd($request);
+        $quest = Quest::findOrFail($id);
+        return 1;
+    }
 }

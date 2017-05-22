@@ -644,5 +644,40 @@ $( document ).ready(function(){
         }
     });
 
+    $('#payQuestCoins').click(function(){
+        var id = $(this).data('id');
+        $.ajax({
+            url: 'http://game.wevudu.com/quest/pay_coins',
+            type: "POST",
+            data: {id: id},
+            success: function(data) {
+                if (data.status=='success') swal({ title: "Готово!",
+                    text:"Ви записались на квест!",
+                    type: "success"
+                });
+                else {
+                    var text = data.msg || "";
+                    swal("Помилка!", text, "error");
+                    console.log(data);
+                }
+            },
+            error: function(data) {
+                var errors = data.responseJSON;
+                if (errors){
+                    for(var e in errors) {
+                        swal("Помилка!", errors[e][0], "error");
+                        break;
+                    }
+                }
+                else{
+                    swal("Помилка!", "", "error");
+                    console.log(data);
+                }
+            }
+        });
+    });
+
+
+
 
 });

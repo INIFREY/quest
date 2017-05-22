@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
     Route::post('/profile/edit/social', 'Profile\ProfileController@editSocial')->name('profileEditSocial'); // Редактировать ссылки на соц. сети
 
     Route::get('/quests', 'QuestController@showList'); // Просмотр списка квестов
+    Route::get('/quest/pay_coins', 'QuestController@payCoins'); // Оплата квеста монетами
+    Route::get('/quest/pay_money', 'QuestController@payMoney'); // Оплата квеста деньгами
     Route::get('/quest/{id}', 'QuestController@index'); // Просмотр квеста
     Route::get('/play/{id}', 'QuestController@play'); // Игра
 

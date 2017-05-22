@@ -22,8 +22,8 @@
                         @if($quest->isPlayer(Auth::user()->id))
                             <a href="{{url("/play/".$quest->id)}}" class="waves-effect waves-light btn">Грати</a>
                         @else
-                        <button class="waves-effect waves-light btn">Записатись за {{$quest->coins}} <i class="fa fa-gg-circle"></i></button>
-                        <button class="waves-effect waves-light btn">Записатись за {{$quest->money}} <i class="fa fa-money"></i></button>
+                        <button id="payQuestCoins" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->coins}} <i class="fa fa-gg-circle"></i></button>
+                        <button id="payQuestMoney" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->money}} <i class="fa fa-money"></i></button>
                          @endif
                     </div>
                 </div>
