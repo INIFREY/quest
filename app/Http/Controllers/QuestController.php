@@ -32,7 +32,7 @@ class QuestController extends Controller
     public function payCoins(Request $request){
         if(!$request->ajax()) return redirect('/');
 
-        dd($request);
+        dd($request->input('id'));
         $quest = Quest::findOrFail($id);
         return 1;
     }
