@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::auth();
 
@@ -36,6 +34,7 @@ Route::group(['middleware' => ['auth','email.verify']], function () {
     Route::post('/quest/pay_money', 'QuestController@payMoney'); // Оплата квеста деньгами
     Route::get('/quest/{id}', 'QuestController@index'); // Просмотр квеста
     Route::get('/play/{id}', 'QuestController@play'); // Игра
+    Route::post('/play/{id}', 'QuestController@answer'); // Ответ на вопрос
 
 });
 
@@ -60,11 +59,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
         Route::post('/quest/{id}', 'AdminController@editQuest');
         Route::get('/quest/{id}', 'AdminController@quest');
         Route::get('/quest/{id}/tasks', 'AdminController@tasks');
+        Route::post('/task/{quest_id}/{id]', 'AdminController@editTask');
+        Route::get('/task/{quest_id}/{id]', 'AdminController@task');
 
         Route::post('/ajax/users', 'AjaxController@users');
         Route::post('/ajax/admins', 'AjaxController@admins');
         Route::post('/ajax/edit/admin/{id}', 'AjaxController@adminEdit');
         Route::post('/ajax/quests', 'AjaxController@quests');
-        Route::post('/ajax/tasks', 'AjaxController@tasks');
+        Route::post('/ajax/tasks/{id}', 'AjaxController@tasks');
     });
 });

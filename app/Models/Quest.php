@@ -41,4 +41,44 @@ class Quest extends Model
         $tasks =  DB::table('quest_tasks')->where('quest_id', $this->id)->get();
         return $tasks;
     }
+
+
+    /**
+     * @param $id //пользователя
+     * @return mixed
+     *
+     *  Возвращает задание, на котором остановился пользователь
+     */
+    public function getTask($id){
+        $taskNumber = DB::table('quest_players')->where('quest_id', $this->id)->where('user_id', $id)->first();
+
+
+        if ($this->getLastTask() <= $taskNumber->task) return "finish";
+        else{
+            $task = DB::table('quest_tasks')->where('quest_id', $this->id)->where('sorting', ++$taskNumber->task)->first();
+            return $task;
+        }
+
+    }
+
+    /**
+     * @param $id //пользователя
+     * @return mixed
+     *
+     *  Увеличивает номер текущего вопроса пользователя
+     */
+    public function nextTask($id){
+        $taskNumber = DB::table('quest_players')->where('quest_id', $this->id)->where('user_id', $id)->increment('task');
+        return $taskNumber;
+
+
+    }
+
+    /**
+     * Возвращает номер последнего задания
+     */
+    public function getLastTask(){
+        $last = DB::table('quest_tasks')->where('quest_id', $this->id)->max('sorting');
+        return $last;
+    }
 }

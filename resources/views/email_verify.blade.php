@@ -43,7 +43,7 @@
                     <li>
                         <div class="collapsible-header purple white-text">Змінити email</div>
                         <form class="collapsible-body purple lighten-5 blue-grey-text" method="POST" action="{{url('/email/change')}} " id="changeEmailForm">
-                            {{ csrf_field() }}
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="input-field col s12">
                                 <input id="email" name="email" type="email"
                                        class="{{ $errors->has('email') ? 'invalid' : '' }}">

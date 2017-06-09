@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col s12">
+        <div class="col m10 offset-m1 s12">
             <div class="card-panel">
-                <div>Welcome</div>
+                <div>Ласкаво просимо!</div>
 
                 <div>
-                    Your Application's Landing Page.
+                    Раді вітати вас на нашій платформі. Увійдіть або зареєструйтесь для продовження роботи.
                 </div>
             </div>
         </div>

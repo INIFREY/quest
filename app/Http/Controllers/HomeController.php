@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         //$this->middleware('email.verify');
     }
 
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(!Auth::user()) return view('welcome');
+        else return redirect()->route('profile', ['id' => Auth::user()->id]);
     }
 }

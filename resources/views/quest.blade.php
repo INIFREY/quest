@@ -8,7 +8,7 @@
             <div class="col m8 s12">
                 <div class="card">
                     <div  class="card-content">
-                        {{$quest->text}}
+                        {!!$quest->text!!}
                     </div>
                 </div>
             </div>

@@ -46,7 +46,6 @@ class AdminController extends Controller
 
     public function editQuest(Request $request, $id){
 
-
         $data = Input::all();
         $inputs = [
             'name'=>$data['name'],
@@ -72,6 +71,6 @@ class AdminController extends Controller
     public function tasks($id){
         $quest = Quest::findOrFail($id);
         $tasks = $quest->allTasks();
-        return view('admin.tasks', ['admin'=>Auth::guard('admin')->user(), 'tasks'=>$tasks]);
+        return view('admin.tasks', ['admin'=>Auth::guard('admin')->user(), 'tasks'=>$tasks, 'id'=>$id]);
     }
 }

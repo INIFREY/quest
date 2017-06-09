@@ -18,7 +18,8 @@
             <h5 class="panel-title">Список завдань<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="reload" data-type="tasks"></a></li>
+                    <li><a data-action="reload" data-type="tasks/{{$id}}"></a></li>
+                    <li><a data-action="icon-add" data-type="tasks/{{$id}}"></a></li>
                 </ul>
             </div>
         </div>

@@ -23,7 +23,7 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#" class="editQuest" ><i class=" icon-pencil4"></i> Редагувати</a></li>
+                            <li><a href="{{url("/admin/task/".$task->quest_id."/".$task->id)}}" class="editTask" ><i class=" icon-pencil4"></i> Редагувати</a></li>
                         </ul>
                     </li>
                 </ul>

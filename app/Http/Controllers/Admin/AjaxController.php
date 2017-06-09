@@ -47,5 +47,13 @@ class AjaxController extends Controller
         return view('admin.ajax.quests_table', ['quests'=>$quests]);
     }
 
+    public function tasks(Request $request, $id){
+        if(!$request->ajax()) return redirect('/');
+        $quest = Quest::findOrFail($id);
+        $tasks = $quest->allTasks();
+
+        return view('admin.ajax.tasks_table', ['tasks' => $tasks, 'id'=>$id]);
+    }
+
     
 }

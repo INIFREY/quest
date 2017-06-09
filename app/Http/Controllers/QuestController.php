@@ -25,8 +25,12 @@ class QuestController extends Controller
         $user = Auth::user();
         if (!$quest->isPlayer($user->id)) abort(404);
         if (!$quest->isStart()) abort(404);
+        
+        $task = $quest->getTask($user->id);
 
-        return view('play', ['quest'=>$quest]);
+        if ($task=='finish') return view('play_finish', ['quest'=>$quest]);
+
+        return view('play', ['task'=>$task]);
     }
 
     public function payCoins(Request $request){
@@ -35,5 +39,25 @@ class QuestController extends Controller
         dd($request->input('id'));
         $quest = Quest::findOrFail($id);
         return 1;
+    }
+
+    public function answer(Request $request, $id){
+        $quest = Quest::findOrFail($id);
+        $user = Auth::user();
+        if (!$quest->isPlayer($user->id)) abort(404);
+        if (!$quest->isStart()) abort(404);
+
+        $task = $quest->getTask($user->id);
+
+        $this->validate($request, [
+            'answer' => 'required',
+        ]);
+
+        if ($task->answer == $request->input('answer')) {
+            $quest->nextTask($user->id);
+            return redirect('/play/'.$quest->id);
+        };
+
+        return view('play', ['task'=>$task, 'error'=>true]);
     }
 }
