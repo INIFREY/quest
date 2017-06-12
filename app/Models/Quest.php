@@ -25,6 +25,17 @@ class Quest extends Model
     }
 
     /**
+     * @param $id //пользователя
+     *
+     * Добавляет нового пользователя к квесту
+     */
+    public function addPlayer($id){
+        DB::table('quest_players')->insert(
+            ['user_id' => $id, 'quest_id' => $this->id, 'task'=>0, 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),]
+        );
+    }
+
+    /**
      * Если квест сейчас идет
      */
     public function isStart(){
@@ -80,5 +91,14 @@ class Quest extends Model
     public function getLastTask(){
         $last = DB::table('quest_tasks')->where('quest_id', $this->id)->max('sorting');
         return $last;
+    }
+
+    /**
+     *  Проверяет, закончился ли квест
+     */
+    public function finished(){
+        $now = Carbon::now();
+        $end = Carbon::parse($this->end_date);
+        return $now>$end;
     }
 }

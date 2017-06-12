@@ -35,10 +35,14 @@ class QuestController extends Controller
 
     public function payCoins(Request $request){
         if(!$request->ajax()) return redirect('/');
+        $quest = Quest::findOrFail($request->input('id'));
+        $user = Auth::user();
+        if ($quest->finished()) return ['status'=>'error', 'msg'=>"Квест вже закінчився!"];
+        if ($user->coins<$quest->coins) return ['status'=>'error', 'msg'=>"У вас не достатня кількість монет!"];
 
-        dd($request->input('id'));
-        $quest = Quest::findOrFail($id);
-        return 1;
+        $user->minusCoins($quest->coins);
+        $quest->addPlayer($user->id);
+        return ['status'=>'success'];
     }
 
     public function answer(Request $request, $id){

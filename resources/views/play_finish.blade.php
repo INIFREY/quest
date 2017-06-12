@@ -7,7 +7,7 @@
                 <div class="col s12">
                     <div class="card">
                         <div class="card-content">
-                            <h3>Квест закончен!</h3>
+                            <h4>Ви виконали усі завдання. Очікуйте результатів.</h4>
                             <br>
 
                         </div>

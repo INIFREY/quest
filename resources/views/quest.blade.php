@@ -18,13 +18,14 @@
                     <div  class="card-content">
                         <img width="100%" src="{{$quest->img}}" alt=" {{$quest->name}}">
                        {{$quest->name}}
-                        <div>Початок:  {{$quest->start_date}}</div>
+                        <div>Початок:  {{Carbon\Carbon::parse($quest->start_date)->format('d.m.Y H:i') }}</div>
+                        <div>Кінець: {{Carbon\Carbon::parse($quest->end_date)->format('d.m.Y H:i') }}</div>
                         @if($quest->isPlayer(Auth::user()->id))
                             <a href="{{url("/play/".$quest->id)}}" class="waves-effect waves-light btn">Грати</a>
-                        @else
-                        <button id="payQuestCoins" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->coins}} <i class="fa fa-gg-circle"></i></button>
-                        <button id="payQuestMoney" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->money}} <i class="fa fa-money"></i></button>
-                         @endif
+                        @elseif(!$quest->finished())
+                            <button id="payQuestCoins" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->coins}} <i class="fa fa-gg-circle"></i></button>
+                            <button id="payQuestMoney" data-id="{{$quest->id}}" class="waves-effect waves-light btn">Записатись за {{$quest->money}} <i class="fa fa-money"></i></button>
+                        @endif
                     </div>
                 </div>
             </div>

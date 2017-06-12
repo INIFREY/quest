@@ -136,6 +136,16 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     *  Снимает деньги у пользователя
+     */
+    public function minusCoins($count){
+        if ($this->coins< $count) return false;
+        $this->coins -= $count;
+        $this->save();
+        return true;
+    }
+
 
 
 
